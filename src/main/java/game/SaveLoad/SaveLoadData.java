@@ -1,4 +1,7 @@
-package game;
+package game.SaveLoad;
+
+import game.Data.Game;
+import game.Data.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ public class SaveLoadData implements SaveLoadDataAPI {
     @Override
     public int saveUser(User user) {
         users.add(user);
-        return user.id;
+        return user.getId();
     }
 
     @Override

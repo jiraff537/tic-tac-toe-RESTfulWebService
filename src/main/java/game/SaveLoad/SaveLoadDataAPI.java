@@ -1,4 +1,6 @@
-package game;
+package game.SaveLoad;
+
+import game.Data.User;
 
 /**
  * Created by jiraff537 on 5/19/17.

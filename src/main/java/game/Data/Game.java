@@ -1,4 +1,4 @@
-package game;
+package game.Data;
 
 /**
  * Created by jiraff537 on 5/19/17.

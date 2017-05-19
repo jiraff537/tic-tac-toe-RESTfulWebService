@@ -1,7 +1,7 @@
-game/Controller.class
-game/User.class
-game/Greeting.class
+game/Controller/Controller.class
+game/SaveLoad/SaveLoadData.class
+game/SaveLoad/SaveLoadDataAPI.class
+game/Data/User.class
 game/Application.class
-game/SaveLoadData.class
-game/SaveLoadDataAPI.class
-game/Game.class
+game/Data/Greeting.class
+game/Data/Game.class

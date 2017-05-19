@@ -1,10 +1,14 @@
-package game;
+package game.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import game.Data.Game;
+import game.SaveLoad.SaveLoadData;
+import game.SaveLoad.SaveLoadDataAPI;
+import game.Data.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController //=@Controller + @ResponseBody
@@ -14,10 +18,10 @@ public class Controller {
     private final AtomicLong counter = new AtomicLong();
     private final AtomicInteger userCounter = new AtomicInteger();
 
-    //List<User> users = new ArrayList<>();
+
     List<Game> games = new ArrayList<>();
 
-    SaveLoadDataAPI userss = new SaveLoadData();
+    SaveLoadDataAPI users = new SaveLoadData();
 
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -25,19 +29,21 @@ public class Controller {
     public String addplayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
         User user = new User(userCounter.incrementAndGet(), name, code);
-        //users.add(user);
-        return "userId=" + userss.saveUser(user); //возвращю id пользователя в users
+        return "userId=" + users.saveUser(user); //возвращю id пользователя в users
     }
 
-    @RequestMapping(value = "/debug", method = RequestMethod.GET)  //@RequestMapping() http://localhost:8080/debug
+    @RequestMapping(value = "/debug", method = RequestMethod.GET)
+    //Дебаг, тестирование чего-либо. http://localhost:8080/debug
     public String debug(@RequestParam(value = "debug", defaultValue = "1") int debug) {
         String result = null;
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < userss.userSize(); i++) {
-            stringBuilder.append(" " + userss.loadUser(i).name);
+
+        for (int i = 0; i < users.userSize(); i++) {
+            stringBuilder.append(" " + users.loadUser(i).getName());
             result = stringBuilder.toString();
         }
-        return userss.toString() + result;
+
+        return users.toString() + result;
     }
 
 
