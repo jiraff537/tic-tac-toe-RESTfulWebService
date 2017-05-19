@@ -34,12 +34,9 @@ public class Controller {
         String result = null;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < userss.userSize(); i++) {
-
             stringBuilder.append(" " + userss.loadUser(i).name);
-
             result = stringBuilder.toString();
         }
-
         return userss.toString() + result;
     }
 
