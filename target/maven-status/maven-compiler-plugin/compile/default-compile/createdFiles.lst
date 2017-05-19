@@ -1,3 +1,4 @@
-hello/Greeting.class
-hello/Application.class
-hello/GreetingController.class
+game/Controller.class
+game/Greeting.class
+game/Application.class
+game/User.class

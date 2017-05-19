@@ -1,7 +1,7 @@
 
 //https://spring.io/guides/gs/rest-service/
 
-package hello;
+package game;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,13 +16,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // the classpath. This flags the application as a web application and
 // activates key behaviors such as setting up a DispatcherServlet.
 //@ComponentScan tells Spring to look for other components, configurations,
-// and services in the hello package, allowing it to find the controllers.
+// and services in the game package, allowing it to find the controllers.
 public class Application {
 
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
-
 
     }
 }
