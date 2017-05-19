@@ -13,30 +13,34 @@ public class Controller {
     private static final String template = "Hello, %s %d!";
     private final AtomicLong counter = new AtomicLong();
     private final AtomicInteger userCounter = new AtomicInteger();
-    List<User> users = new ArrayList<>();
+
+    //List<User> users = new ArrayList<>();
     List<Game> games = new ArrayList<>();
 
+    SaveLoadDataAPI userss = new SaveLoadData();
 
-    @RequestMapping(value="/user",method = RequestMethod.GET)  //регистрация пользователя http://localhost:8080/user?name=Alexei&code=12
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    //регистрация пользователя http://localhost:8080/user?name=Alexei&code=12
     public String addplayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
-        User user = new User(userCounter.incrementAndGet(),name,code);
-        users.add(user);
-        return "userId="+user.id; //возвращю id пользователя в users
+        User user = new User(userCounter.incrementAndGet(), name, code);
+        //users.add(user);
+        return "userId=" + userss.saveUser(user); //возвращю id пользователя в users
     }
 
-    @RequestMapping(value="/debug",method = RequestMethod.GET)  //@RequestMapping()
-    public String debug(@RequestParam(value = "debug",defaultValue ="1") int debug) {
-        String result=null;
+    @RequestMapping(value = "/debug", method = RequestMethod.GET)  //@RequestMapping() http://localhost:8080/debug
+    public String debug(@RequestParam(value = "debug", defaultValue = "1") int debug) {
+        String result = null;
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < users.size(); i++) {
+        for (int i = 0; i < userss.userSize(); i++) {
 
-            stringBuilder.append(" "+users.get(i).name);
+            stringBuilder.append(" " + userss.loadUser(i).name);
 
-            result=stringBuilder.toString();
+            result = stringBuilder.toString();
         }
 
-        return users.toString() + result;
+        return userss.toString() + result;
     }
 
 
