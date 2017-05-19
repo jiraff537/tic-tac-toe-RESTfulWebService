@@ -27,8 +27,16 @@ public class Controller {
 
     @RequestMapping(value="/debug",method = RequestMethod.GET)  //@RequestMapping()
     public String debug(@RequestParam(value = "debug",defaultValue ="1") int debug) {
+        String result=null;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < users.size(); i++) {
 
-        return users.toString();
+            stringBuilder.append(" "+users.get(i).name);
+
+            result=stringBuilder.toString();
+        }
+
+        return users.toString() + result;
     }
 
 

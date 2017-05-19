@@ -2,3 +2,4 @@ game/Controller.class
 game/Greeting.class
 game/Application.class
 game/User.class
+game/Game.class
