@@ -8,7 +8,7 @@ import game.Data.User;
 public interface SaveLoadDataAPI<T> {//интерфейс сохраниния загрузки данных/ Дженерик для USER/GAME/TURN
 
 
-    public int save(T user);
+    public int save(T user,int id);
 
     public T load(int id);
 

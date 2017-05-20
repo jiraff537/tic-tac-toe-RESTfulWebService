@@ -16,22 +16,31 @@ public class Controller {
 
     private static final String template = "Hello, %s %d!";
 
-    private final AtomicInteger userCounter = new AtomicInteger(); //добиваемся уникальности idшника при паралельных запросах
+    // однажды это приложение может стать многопоточным...
+    private final AtomicInteger userCounter = new AtomicInteger();  //добиваемся уникальности id-шника при паралельных запросах
+    private final AtomicInteger gameCounter = new AtomicInteger();  //добиваемся уникальности id-шника при паралельных запросах
+
 
     SaveLoadDataAPI<User> users = new SaveLoadData();
     SaveLoadDataAPI<User> games = new SaveLoadData(); //TODO impmement this!
     SaveLoadDataAPI<User> turns = new SaveLoadData(); //TODO impmement this!
 
-
-    @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
+    @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     public String addplayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
-        User user = new User(userCounter.incrementAndGet(), name, code);
-        return "userId=" + users.save(user); //возвращю id пользователя в users
+        User user = new User(name, code);
+        return "userId=" + users.save(user, userCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
     }
 
-    
+//    //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
+//    @RequestMapping(value = "/creategame", method = RequestMethod.GET)
+//    public String addplayer(@RequestParam(value = "player1id") int player1id,
+//                            @RequestParam(value = "player2id") int player2id) {
+//        Game game = new Game(player1id, player2id);
+//        return "gameId=" + games.save(game, gameCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
+//    }
+
 
     @RequestMapping(value = "/debug", method = RequestMethod.GET)
     //Дебаг, тестирование чего-либо. http://localhost:8080/debug

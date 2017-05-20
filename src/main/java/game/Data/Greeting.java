@@ -1,6 +1,8 @@
 package game.Data;
 
-public class Greeting {
+@Deprecated
+
+public class Greeting { //Класс из туториала https://spring.io/guides/gs/rest-service/
 
     private final long id;
     private final String content;
