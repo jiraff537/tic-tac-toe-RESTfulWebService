@@ -5,12 +5,13 @@ import game.Data.User;
 /**
  * Created by jiraff537 on 5/19/17.
  */
-public interface SaveLoadDataAPI {//интерфейс сохраниния загрузки данных данных
+public interface SaveLoadDataAPI<T> {//интерфейс сохраниния загрузки данных/ Дженерик для USER/GAME/TURN
 
-    public int saveUser(User user);
 
-    public User loadUser(int id);
+    public int save(T user);
 
-    public int userSize();
+    public T load(int id);
+
+    public int size();
 
 }

@@ -15,22 +15,23 @@ import org.springframework.web.bind.annotation.*;
 public class Controller {
 
     private static final String template = "Hello, %s %d!";
-    private final AtomicLong counter = new AtomicLong();
-    private final AtomicInteger userCounter = new AtomicInteger();
+
+    private final AtomicInteger userCounter = new AtomicInteger(); //добиваемся уникальности idшника при паралельных запросах
+
+    SaveLoadDataAPI<User> users = new SaveLoadData();
+    SaveLoadDataAPI<User> games = new SaveLoadData(); //TODO impmement this!
+    SaveLoadDataAPI<User> turns = new SaveLoadData(); //TODO impmement this!
 
 
-    List<Game> games = new ArrayList<>();
-
-    SaveLoadDataAPI users = new SaveLoadData();
-
-
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    //регистрация пользователя http://localhost:8080/user?name=Alexei&code=12
+    @RequestMapping(value = "/adduser", method = RequestMethod.GET)
+    //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
     public String addplayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
         User user = new User(userCounter.incrementAndGet(), name, code);
-        return "userId=" + users.saveUser(user); //возвращю id пользователя в users
+        return "userId=" + users.save(user); //возвращю id пользователя в users
     }
+
+    
 
     @RequestMapping(value = "/debug", method = RequestMethod.GET)
     //Дебаг, тестирование чего-либо. http://localhost:8080/debug
@@ -38,8 +39,8 @@ public class Controller {
         String result = null;
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (int i = 0; i < users.userSize(); i++) {
-            stringBuilder.append(" " + users.loadUser(i).getName());
+        for (int i = 0; i < users.size(); i++) {
+            stringBuilder.append(" " + users.load(i).getName());
             result = stringBuilder.toString();
         }
 

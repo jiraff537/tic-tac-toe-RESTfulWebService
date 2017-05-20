@@ -1,35 +1,27 @@
 package game.SaveLoad;
 
-import game.Data.Game;
-import game.Data.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jiraff537 on 5/19/17.
  */
-public class SaveLoadData implements SaveLoadDataAPI {
-    List<User> users = new ArrayList<>();
-    List<Game> games = new ArrayList<>();
-
-//    SaveLoadData() {
-//        users=null;
-//    }
+public class SaveLoadData<T> implements SaveLoadDataAPI<T> {
+    List<T> data = new ArrayList<>();
 
     @Override
-    public int saveUser(User user) {
-        users.add(user);
-        return user.getId();
+    public int save(T t) {
+        data.add(t);
+        return data.size();
     }
 
     @Override
-    public User loadUser(int id) {
-        return users.get(id);
+    public T load(int id) {
+        return data.get(id);
     }
 
     @Override
-    public int userSize() {
-        return users.size();
+    public int size() {
+        return data.size();
     }
 }
