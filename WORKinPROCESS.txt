@@ -1,0 +1,6 @@
+мысли, заметки и прочее:
+
+POST
+curl --data "param1=value1&param2=value2" http://hostname/resource
+
+curl --data "name=elena&code=66" http://localhost:8080/adduser
