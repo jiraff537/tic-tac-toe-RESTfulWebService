@@ -1,4 +1,5 @@
 game/Controller/Controller.class
+game/Controller/Errors.class
 game/SaveLoad/SaveLoadData.class
 game/SaveLoad/SaveLoadDataAPI.class
 game/Data/User.class

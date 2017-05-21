@@ -18,13 +18,9 @@ public class Controller {
     private final AtomicInteger gameCounter = new AtomicInteger();  //добиваемся уникальности id-шника
 
 
-    SaveLoadDataAPI<User> users;
-    SaveLoadDataAPI<Game> games;
+    SaveLoadDataAPI<User> users = new SaveLoadData<User>();
+    SaveLoadDataAPI<Game> games = new SaveLoadData<Game>();
 
-    public Controller() {
-        users = new SaveLoadData<User>();
-        games = new SaveLoadData<Game>();
-    }
     //SaveLoadDataAPI<Turn> turns = new SaveLoadData(); //TODO impmement this!
 
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
@@ -44,7 +40,11 @@ public class Controller {
     }
 
     //получить текущее состояние игрового поля
+    @RequestMapping(value = "/getgamestate",method = RequestMethod.GET)
+    public String getGameState(@RequestParam(value="gameid") int gameId){
 
+    return "______________-";
+    }
 
 
 
@@ -59,17 +59,17 @@ public class Controller {
         String allUsers = null;
         StringBuilder sbUsers = new StringBuilder();
         for (int i = 0; i < users.size(); i++) {
-            sbUsers.append(" users.id=" + i + " user.name=" + users.load(i).getName());
+            sbUsers.append(" |users.id=" + i + " |user.name=" + users.load(i).getName());
             allUsers = sbUsers.toString();
         }
 
         String allGames = null;
         StringBuilder sbGames = new StringBuilder();
         for (int i = 0; i < games.size(); i++) {
-            sbGames.append("games.id=" + i +
-                    " pl1=" + games.load(i).getPlayer1id() +
-                    " pl2=" + games.load(i).getPlayer2id() +
-                    " PoleAsString=" + games.load(i).getPoleAsString());
+            sbGames.append(" |games.id=" + i +
+                    " |pl1=" + games.load(i).getPlayer1id() +
+                    " |pl2=" + games.load(i).getPlayer2id() +
+                    " |PoleAsString=" + games.load(i).getPoleAsString());
             allGames = sbGames.toString();
         }
 

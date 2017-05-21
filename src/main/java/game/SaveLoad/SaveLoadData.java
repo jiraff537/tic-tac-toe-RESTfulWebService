@@ -7,7 +7,7 @@ import java.util.List;
  * Created by jiraff537 on 5/19/17.
  */
 public class SaveLoadData<T> implements SaveLoadDataAPI<T> {
-    List<T> data = new ArrayList<>();
+    List<T> data = new ArrayList<T>();
 
     @Override
     public int save(T t, int id) {
