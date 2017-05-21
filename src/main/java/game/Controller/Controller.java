@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController //=@Controller + @ResponseBody
 public class Controller {
 
-    private static final String template = "Hello, %s %d!";
+    //private static final String template = "Hello, %s %d!";
 
     //кажеться так правильнее:
     private final AtomicInteger userCounter = new AtomicInteger();  //добиваемся уникальности id-шника
@@ -20,14 +20,15 @@ public class Controller {
 
     SaveLoadDataAPI<User> users = new SaveLoadData<User>();
     SaveLoadDataAPI<Game> games = new SaveLoadData<Game>();
-
     //SaveLoadDataAPI<Turn> turns = new SaveLoadData(); //TODO impmement this!
+
 
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
     @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     public String addPlayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
         User user = new User(name, code);
+        errorHERE=//System.out.println(userCounter.get());
         return "userId=" + users.save(user, userCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
     }
 
@@ -39,18 +40,12 @@ public class Controller {
         return "gameId=" + games.save(game, gameCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
     }
 
-    //получить текущее состояние игрового поля
-    @RequestMapping(value = "/getgamestate",method = RequestMethod.GET)
-    public String getGameState(@RequestParam(value="gameid") int gameId){
+    //получить текущее состояние игрового поля http://localhost:8080//gamestate?gameid=1
+    @RequestMapping(value = "/gamestate", method = RequestMethod.GET)
+    public String getGameState(@RequestParam(value = "gameid") int gameId) {
 
-    return "______________-";
+        return "gamestate=" + games.load(gameId).getPoleAsString();
     }
-
-
-
-
-
-
 
 
     @RequestMapping(value = "/debug", method = RequestMethod.GET)
@@ -59,14 +54,14 @@ public class Controller {
         String allUsers = null;
         StringBuilder sbUsers = new StringBuilder();
         for (int i = 0; i < users.size(); i++) {
-            sbUsers.append(" |users.id=" + i + " |user.name=" + users.load(i).getName());
+            sbUsers.append("<br>|users.id=" + i + " |user.name=" + users.load(i).getName());
             allUsers = sbUsers.toString();
         }
 
         String allGames = null;
         StringBuilder sbGames = new StringBuilder();
         for (int i = 0; i < games.size(); i++) {
-            sbGames.append(" |games.id=" + i +
+            sbGames.append("<br>|games.id=" + i +
                     " |pl1=" + games.load(i).getPlayer1id() +
                     " |pl2=" + games.load(i).getPlayer2id() +
                     " |PoleAsString=" + games.load(i).getPoleAsString());
@@ -77,7 +72,7 @@ public class Controller {
                 "<br>" +
                 "<H2>debug GAMES:</H2><br> " + games.toString() + allGames + "<br>" +
                 "<br>" +
-                "==end==";
+                "-=<debug.end>=-";
 
     }
 
