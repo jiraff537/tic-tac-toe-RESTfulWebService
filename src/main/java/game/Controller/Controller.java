@@ -1,9 +1,6 @@
 package game.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 import game.Data.Game;
 import game.SaveLoad.SaveLoadData;
@@ -16,44 +13,72 @@ public class Controller {
 
     private static final String template = "Hello, %s %d!";
 
-    // однажды это приложение может стать многопоточным...
-    private final AtomicInteger userCounter = new AtomicInteger();  //добиваемся уникальности id-шника при паралельных запросах
-    private final AtomicInteger gameCounter = new AtomicInteger();  //добиваемся уникальности id-шника при паралельных запросах
+    //кажеться так правильнее:
+    private final AtomicInteger userCounter = new AtomicInteger();  //добиваемся уникальности id-шника
+    private final AtomicInteger gameCounter = new AtomicInteger();  //добиваемся уникальности id-шника
 
 
-    SaveLoadDataAPI<User> users = new SaveLoadData();
-    SaveLoadDataAPI<User> games = new SaveLoadData(); //TODO impmement this!
-    SaveLoadDataAPI<User> turns = new SaveLoadData(); //TODO impmement this!
+    SaveLoadDataAPI<User> users;
+    SaveLoadDataAPI<Game> games;
+
+    public Controller() {
+        users = new SaveLoadData<User>();
+        games = new SaveLoadData<Game>();
+    }
+    //SaveLoadDataAPI<Turn> turns = new SaveLoadData(); //TODO impmement this!
 
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
     @RequestMapping(value = "/adduser", method = RequestMethod.GET)
-    public String addplayer(@RequestParam(value = "name") String name,
+    public String addPlayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
         User user = new User(name, code);
         return "userId=" + users.save(user, userCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
     }
 
-//    //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
-//    @RequestMapping(value = "/creategame", method = RequestMethod.GET)
-//    public String addplayer(@RequestParam(value = "player1id") int player1id,
-//                            @RequestParam(value = "player2id") int player2id) {
-//        Game game = new Game(player1id, player2id);
-//        return "gameId=" + games.save(game, gameCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
-//    }
+    //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
+    @RequestMapping(value = "/creategame", method = RequestMethod.GET)
+    public String createGame(@RequestParam(value = "player1id") int player1id,
+                             @RequestParam(value = "player2id") int player2id) {
+        Game game = new Game(player1id, player2id);
+        return "gameId=" + games.save(game, gameCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
+    }
+
+    //получить текущее состояние игрового поля
+
+
+
+
+
+
+
 
 
     @RequestMapping(value = "/debug", method = RequestMethod.GET)
     //Дебаг, тестирование чего-либо. http://localhost:8080/debug
     public String debug(@RequestParam(value = "debug", defaultValue = "1") int debug) {
-        String result = null;
-        StringBuilder stringBuilder = new StringBuilder();
-
+        String allUsers = null;
+        StringBuilder sbUsers = new StringBuilder();
         for (int i = 0; i < users.size(); i++) {
-            stringBuilder.append(" " + users.load(i).getName());
-            result = stringBuilder.toString();
+            sbUsers.append(" users.id=" + i + " user.name=" + users.load(i).getName());
+            allUsers = sbUsers.toString();
         }
 
-        return users.toString() + result;
+        String allGames = null;
+        StringBuilder sbGames = new StringBuilder();
+        for (int i = 0; i < games.size(); i++) {
+            sbGames.append("games.id=" + i +
+                    " pl1=" + games.load(i).getPlayer1id() +
+                    " pl2=" + games.load(i).getPlayer2id() +
+                    " PoleAsString=" + games.load(i).getPoleAsString());
+            allGames = sbGames.toString();
+        }
+
+        return "<H1>debug USERS:</H1><br> " + users.toString() + allUsers + "<br>" +
+                "<br>" +
+                "<H2>debug GAMES:</H2><br> " + games.toString() + allGames + "<br>" +
+                "<br>" +
+                "==end==";
+
     }
 
 

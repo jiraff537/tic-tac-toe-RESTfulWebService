@@ -19,6 +19,10 @@ echo curl 'http://localhost:8080/adduser?name='$user2'&code=11'
 curl 'http://localhost:8080/adduser?name='$user2'&code=11'
 echo  
 
+echo curl 'http://localhost:8080/creategame?player1id=1&player2id=2'
+curl 'http://localhost:8080/creategame?player1id=1&player2id=2'
+echo
+
 echo curl 'http://localhost:8080/debug'
 curl 'http://localhost:8080/debug'
 echo

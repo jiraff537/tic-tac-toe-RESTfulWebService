@@ -10,7 +10,7 @@ public class SaveLoadData<T> implements SaveLoadDataAPI<T> {
     List<T> data = new ArrayList<>();
 
     @Override
-    public int save(T t,int id) {
+    public int save(T t, int id) {
         data.add(t);
         return data.size();
     }
