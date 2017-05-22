@@ -28,8 +28,10 @@ public class Controller {
     public String addPlayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") int code) {
         User user = new User(name, code);
-        errorHERE=//System.out.println(userCounter.get());
-        return "userId=" + users.save(user, userCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
+
+        System.out.println("userCounter.get()="+userCounter.get());
+
+        return "userId=" + users.save(user, userCounter.getAndIncrement()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
     }
 
     //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
@@ -37,7 +39,10 @@ public class Controller {
     public String createGame(@RequestParam(value = "player1id") int player1id,
                              @RequestParam(value = "player2id") int player2id) {
         Game game = new Game(player1id, player2id);
-        return "gameId=" + games.save(game, gameCounter.incrementAndGet()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
+
+        System.out.println("----------gameCounter.get()="+gameCounter.get());
+
+        return "gameId=" + games.save(game, gameCounter.getAndIncrement()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
     }
 
     //получить текущее состояние игрового поля http://localhost:8080//gamestate?gameid=1

@@ -11,8 +11,8 @@ public class SaveLoadData<T> implements SaveLoadDataAPI<T> {
 
     @Override
     public int save(T t, int id) {
-        data.add(t);
-        return data.size();
+        data.add(id,t);
+        return id;//data.size();
     }
 
     @Override
