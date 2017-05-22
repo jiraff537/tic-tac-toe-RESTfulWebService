@@ -26,4 +26,4 @@ echo
 echo curl 'http://localhost:8080/debug'
 curl 'http://localhost:8080/debug'
 echo
-echo end end end
+cowsay конец-делу венец!
