@@ -11,3 +11,13 @@ curl -X GET 'http://localhost:5000/locations?id=3'
 http://localhost:8080/adduser?name=asd&code=2
 
 curl -X GET 'http://localhost:8080/adduser?name=asd&code=2'
+--------------------GIT PUSH-----------------
+
+git push -u origin master
+This sends your commits in your “master” branch to GitHub
+
+If you want to continue making changes and pushing them to GitHub you’ll just need to use the following three commands:
+git add .
+git commit -m "type your commit message here"
+git push origin master
+-------------------------
