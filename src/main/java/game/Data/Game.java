@@ -1,5 +1,7 @@
 package game.Data;
 
+import java.util.Arrays;
+
 /**
  * Created by jiraff537 on 5/19/17.
  */
@@ -16,6 +18,7 @@ public class Game {
 
 
     public Game(int player1id, int player2id) {
+
         this.player1id = player1id;
         this.player2id = player2id;
     }
@@ -42,11 +45,12 @@ public class Game {
 
     public String getPoleAsString() {
 
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < pole.length; i++) {
-            s.append(pole[i]);
-        }
-        return s.toString();
+        return Arrays.toString(pole);
+//        StringBuilder s = new StringBuilder();
+//        for (int i = 0; i < pole.length; i++) {
+//            s.append(pole[i]);
+//        }
+//        return s.toString();
     }
 
 
