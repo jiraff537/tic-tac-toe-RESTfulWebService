@@ -73,11 +73,14 @@ public class Controller {
             allGames = sbGames.toString();
         }
 
-        return "<H1>debug USERS:</H1><br> " + users.toString() + allUsers + "<br>" +
+        return "<H3>debug USERS:</H3> " + users.toString() + allUsers + "<br>" +
                 "<br>" +
-                "<H2>debug GAMES:</H2><br> " + games.toString() + allGames + "<br>" +
+                "<H3>debug GAMES:</H3> " + games.toString() + allGames + "<br>" +
                 "<br>" +
-                "-=<debug.end>=-";
+                " __________________\n" +"<br>"+
+                "< конец-делу венец! >\n" +"<br>"+
+                " --------------------------\n" +"<br>"+
+                "";
 
     }
 
