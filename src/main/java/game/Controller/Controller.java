@@ -10,31 +10,24 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController //=@Controller + @ResponseBody
 public class Controller {
-
-    //private static final String template = "Hello, %s %d!";
-
-    //кажеться так правильнее:
-    private final AtomicInteger userCounter = new AtomicInteger();  //добиваемся уникальности id-шника
-    private final AtomicInteger gameCounter = new AtomicInteger();  //добиваемся уникальности id-шника
+    private final AtomicInteger userCounter = new AtomicInteger();  //для уникальности id-шника
+    private final AtomicInteger gameCounter = new AtomicInteger();  //для уникальности id-шника
 
 
     SaveLoadDataAPI<User> users = new SaveLoadData<User>();
     SaveLoadDataAPI<Game> games = new SaveLoadData<Game>();
     //SaveLoadDataAPI<Turn> turns = new SaveLoadData(); //TODO impmement this!
 
-
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
     @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     public String addPlayer(@RequestParam(value = "name") String name,
                             @RequestParam(value = "code") String code) {
         User user = new User();
-        String createStatus; //статус при создании пользователя ОК или описание ошибки
-        createStatus = user.create(name, code);
+        String createStatus = user.create(name, code);//статус при создании пользователя ОК или описание ошибки
         System.out.println("userCounter.get()=" + userCounter.get()); //log2console
         return createStatus.equals("OK") ?
                 "userId=" + users.save(user, userCounter.getAndIncrement()):
-                createStatus
-                ; //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
+                createStatus;
     }
 
     //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
@@ -43,7 +36,7 @@ public class Controller {
                              @RequestParam(value = "player2id") int player2id) {
         Game game = new Game(player1id, player2id);
         System.out.println("---------------------gameCounter.get()=" + gameCounter.get()); //log2console
-        return "gameId=" + games.save(game, gameCounter.getAndIncrement()); //уникальный id в сохраненном потоке где бы он не был в БД или простом ArrayList'е
+        return "gameId=" + games.save(game, gameCounter.getAndIncrement());
     }
 
     //получить текущее состояние игрового поля http://localhost:8080//gamestate?gameid=1

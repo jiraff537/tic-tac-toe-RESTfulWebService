@@ -28,3 +28,7 @@ curl 'http://localhost:8080/debug'
 echo
 cowsay -d конец-делу венец!
 #cowsay -bdgpstwy text message
+
+DIV=$((8+1))
+R=$(($RANDOM%$DIV))
+echo Today RANDOM=$R
