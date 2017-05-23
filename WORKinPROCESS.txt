@@ -20,4 +20,47 @@ If you want to continue making changes and pushing them to GitHub you’ll just 
 git add .
 git commit -m "type your commit message here"
 git push origin master
--------------------------
+---------------------SUCCES
+---------------------remove *.jar file from GIT-------------------
+
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch Filename' --prune-empty -- --all
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch target/gs-rest-service-0.1.0.jar' --prune-empty -- --all
+
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch target/gs-rest-service-0.1.0.jar' HEAD
+
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA' --prune-empty --tag-name-filter cat -- --all
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch target/gs-rest-service-0.1.0.jar' --prune-empty --tag-name-filter cat -- --all
+
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch target/gs-rest-service-0.1.0.jar' --prune-empty --tag-name-filter cat -- --all
+git push origin --force --all
+git push origin --force --tags
+----------------------------FAIL! :(
+-------------------try 2 - remove *.jar file from GIT---------------
+
+git filter-branch \
+	--prune-empty \
+	--index-filter \
+		"git rm -rf --cached --ignore-unmatch file1 dir1" \
+	HEAD
+
+git filter-branch --prune-empty --index-filter "git rm -rf --cached --ignore-unmatch gs-rest-service-0.1.0.jar" HEAD
+--------------------try2_FAIL!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

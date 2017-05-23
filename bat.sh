@@ -26,4 +26,5 @@ echo
 echo curl 'http://localhost:8080/debug'
 curl 'http://localhost:8080/debug'
 echo
-cowsay конец-делу венец!
+cowsay -d конец-делу венец!
+#cowsay -bdgpstwy text message
