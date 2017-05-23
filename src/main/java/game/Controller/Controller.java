@@ -24,7 +24,7 @@ public class Controller {
                             @RequestParam(value = "code") String code) {
         User user = new User();
         String createStatus = user.create(name, code);//статус при создании пользователя ОК или описание ошибки
-        System.out.println("userCounter.get()=" + userCounter.get()); //log2console
+        System.out.println("userCounter.get()=" + userCounter.get()+" createStatus="+ createStatus); //log2console
         return createStatus.equals("OK") ?
                 "userId=" + users.save(user, userCounter.getAndIncrement()):
                 createStatus;
@@ -32,11 +32,14 @@ public class Controller {
 
     //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
     @RequestMapping(value = "/creategame", method = RequestMethod.GET)
-    public String createGame(@RequestParam(value = "player1id") int player1id,
-                             @RequestParam(value = "player2id") int player2id) {
-        Game game = new Game(player1id, player2id);
-        System.out.println("---------------------gameCounter.get()=" + gameCounter.get()); //log2console
-        return "gameId=" + games.save(game, gameCounter.getAndIncrement());
+    public String createGame(@RequestParam(value = "player1id") String player1id,
+                             @RequestParam(value = "player2id") String player2id) {
+        Game game = new Game();
+        String createStatus = game.create(player1id, player2id,users);//статус при создании игры ОК или описание ошибки
+        System.out.println("---------------------gameCounter.get()=" + gameCounter.get()+" createStatus="+ createStatus); //log2console
+        return createStatus.equals("OK") ?
+                "gameId=" + games.save(game, gameCounter.getAndIncrement()):
+                createStatus;
     }
 
     //получить текущее состояние игрового поля http://localhost:8080//gamestate?gameid=1

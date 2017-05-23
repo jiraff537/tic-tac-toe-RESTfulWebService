@@ -19,8 +19,7 @@ public class User {
             this.code = new Integer(code);
         } catch (NumberFormatException e) {
             return "ERROR in field 'code=" + code + "', it must be integer! " +
-                    e.getMessage() + "<br><br>" +
-                    StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор
+                    e.getMessage() + "<br><br>" ;// + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор
         }
         return "OK";
     }

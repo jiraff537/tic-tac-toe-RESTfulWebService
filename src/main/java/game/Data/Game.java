@@ -1,5 +1,8 @@
 package game.Data;
 
+import game.SaveLoad.SaveLoadDataAPI;
+import game.utility.StringUtils;
+
 import java.util.Arrays;
 
 /**
@@ -18,11 +21,22 @@ public class Game {
 //            7, 8, 9};   //2 - О нолик
 
 
-    public Game(int player1id, int player2id) {
-
-        this.player1id = player1id;
-        this.player2id = player2id;
+    public String create(String player1id, String player2id, SaveLoadDataAPI<User> users) {
+        try{
+            this.player1id = new Integer(player1id);
+            this.player2id = new Integer(player2id);
+        } catch (NumberFormatException e){
+            return "ERROR in field 'player1id' or 'player1id', both of it must be integer! " +
+                    e.getMessage() + "<br><br>" ; // + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор
+        }
+        return "OK";
     }
+
+//    public Game(int player1id, int player2id) {
+//
+//        this.player1id = player1id;
+//        this.player2id = player2id;
+//    }
 
     public String getPoleAsString() {
         return Arrays.toString(pole); //избавился от цикла со StringBuilder'ом
@@ -56,4 +70,6 @@ public class Game {
     public void setPole(int[] pole) {
         this.pole = pole;
     }
+
+
 }//class
