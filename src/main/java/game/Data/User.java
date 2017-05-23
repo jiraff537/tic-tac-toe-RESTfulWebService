@@ -7,17 +7,20 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by jiraff537 on 5/19/17.
+ * Класс Пользователь(Игрок)
  */
 public class User {
-    String name;
-    int code;
+    private String name;
+    private int code;
 
     public String create(String name, String code) {
         this.name = name;
         try {
             this.code = new Integer(code);
         } catch (NumberFormatException e) {
-            return "Error in field 'code="+code+"', it must be integer! " +e.getMessage()+"<br><br>"+ StringUtils.StackTraceAsString(e);
+            return "ERROR in field 'code=" + code + "', it must be integer! " +
+                    e.getMessage() + "<br><br>" +
+                    StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор
         }
         return "OK";
     }
@@ -25,20 +28,6 @@ public class User {
 //        //this.id = id;
 //        this.name = name;
 //        this.code = code;
-//    }
-
-//    public String toString (){
-//
-//        return "___";
-//    }
-
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
 //    }
 
     public String getName() {

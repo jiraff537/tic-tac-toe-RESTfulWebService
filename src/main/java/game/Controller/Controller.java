@@ -14,8 +14,8 @@ public class Controller {
     private final AtomicInteger gameCounter = new AtomicInteger();  //для уникальности id-шника
 
 
-    SaveLoadDataAPI<User> users = new SaveLoadData<User>();
-    SaveLoadDataAPI<Game> games = new SaveLoadData<Game>();
+    private SaveLoadDataAPI<User> users = new SaveLoadData<>();
+    private SaveLoadDataAPI<Game> games = new SaveLoadData<>();
     //SaveLoadDataAPI<Turn> turns = new SaveLoadData(); //TODO impmement this!
 
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
@@ -74,9 +74,9 @@ public class Controller {
                 "<br>" +
 
 
-                " __________________\n" + "<br>" +
-                "< конец-делу венец! >\n" + "<br>" +
-                " --------------------------\n" + "<br>" +
+                " _______________\n" + "<br>" +
+                "< EnD oF DeBuG! >\n" + "<br>" +
+                " ---------------------\n" + "<br>" +
                 "";
 
     }

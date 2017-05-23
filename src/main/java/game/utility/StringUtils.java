@@ -4,9 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Created by jiraff537 on 5/22/17.
+ * This is Created by jiraff537 on 5/22/17.
+ * Вспомогательный класс для всяких мелких поручений чтобы не дублировать код.
  */
-@Deprecated
+//@Deprecated
 public class StringUtils {
 
     public static String StackTraceAsString(Exception e){ //convert a stack trace to a string
