@@ -20,10 +20,10 @@ echo curl 'http://localhost:8080/adduser?name='$user2'&code=11'
 echo -n "--"
 curl 'http://localhost:8080/adduser?name='$user2'&code=11'
 echo  
-#creategame ------
-echo curl 'http://localhost:8080/creategame?player1id=1&player2id=2'
+#creategame ------ id 0 w/ id 1
+echo curl 'http://localhost:8080/creategame?player1id=0&player2id=1'
 echo -n "--"
-curl 'http://localhost:8080/creategame?player1id=1&player2id=2'
+curl 'http://localhost:8080/creategame?player1id=0&player2id=1'
 echo
 #debug ------
 echo curl 'http://localhost:8080/debug'
@@ -36,4 +36,4 @@ cowsay -d конец-делу венец!
 #random ------
 DIV=$((8+1))
 R=$(($RANDOM%$DIV))
-echo Today RANDOM=$R
+echo Today RANDOM = $R
