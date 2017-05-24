@@ -32,6 +32,5 @@ public class Application {
 // build the JAR file ./mvn clean package
 //java -jar target/gs-rest-service-0.1.0.jar
 
-//http://localhost:8080/greeting?name=Alexei%20A%20Danilov&age=12
-//or
-//http://localhost:8080/greeting
+// если вдруг failed to start end point associated with protocolhandler http-nio-8080 то:
+//  lsof -i :<portNumber> | grep LISTEN
