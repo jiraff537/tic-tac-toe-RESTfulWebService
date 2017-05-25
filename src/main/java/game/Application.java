@@ -6,7 +6,7 @@ package game;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication //is a convenience annotation that adds all of the following:
+////is a convenience annotation that adds all of the following:
 //@Configuration tags the class as a source of bean definitions
 // for the application context.
 //@EnableAutoConfiguration tells Spring Boot to start adding beans
@@ -17,6 +17,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // activates key behaviors such as setting up a DispatcherServlet.
 //@ComponentScan tells Spring to look for other components, configurations,
 // and services in the game package, allowing it to find the controllers.
+
+@SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
@@ -34,3 +36,5 @@ public class Application {
 
 // если вдруг failed to start end point associated with protocolhandler http-nio-8080 то:
 //  lsof -i :<portNumber> | grep LISTEN
+
+// {"gameid":2}
