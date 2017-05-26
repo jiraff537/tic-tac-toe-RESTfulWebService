@@ -1,9 +1,6 @@
 package game.Data;
 
-import game.utility.StringUtils;
-
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by jiraff537 on 5/19/17.
@@ -12,17 +9,18 @@ import java.util.concurrent.atomic.AtomicLong;
 public class User {
     private int id;
     private String name;
-    private int code;
+    @JsonIgnore
+    private int passwordhash;
 
-    public void create(int id,String name, int code) {
+    public void create(int id,String name, int passwordhash) {
         this.id=id;
         this.name = name;
-        this.code=code;
+        this.passwordhash =passwordhash;
 //        try {
-//            this.code = new Integer(code);
+//            this.passwordhash = new Integer(passwordhash);
 //        } catch (NumberFormatException e) {
 //            return "ERROR " + e.getMessage() +
-//                    " field 'code' must be integer!" +
+//                    " field 'passwordhash' must be integer!" +
 //                    "<br><br>" + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор?
 //        }
 //        return "OK";
@@ -36,8 +34,8 @@ public class User {
         return name;
     }
 
-    public int getCode() {
-        return code;
+    public int getPasswordhash() {
+        return passwordhash;
     }
 
     public void setId(int id) {
@@ -48,7 +46,7 @@ public class User {
         this.name = name;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setPasswordhash(int passwordhash) {
+        this.passwordhash = passwordhash;
     }
 }

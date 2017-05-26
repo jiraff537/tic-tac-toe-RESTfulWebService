@@ -1,6 +1,5 @@
 package game.Controller;
 
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import game.Data.Game;
@@ -23,16 +22,16 @@ public class Controller {
     //SaveLoadDataAPI<Turn> turns = new SaveLoadData(); //TODO impmement this!
 
     //регистрация пользователя http://localhost:8080/adduser?name=Alexei&code=11
-    @RequestMapping(value = "/adduser", method = RequestMethod.GET)
+    @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public @ResponseBody
     User addUser(@RequestParam(value = "name") String name,
-                 @RequestParam(value = "code") int code) {
+                 @RequestParam(value = "passwordhash") int passwordhash) {
         User user = new User();
         user.setId(userCounter.get());
         user.setName(name);
-        user.setCode(code);
+        user.setPasswordhash(passwordhash);
         users.add(user, userCounter.getAndIncrement());
-        //String createStatus = user.checkPhayerExist(name, code);//статус при создании пользователя ОК или описание ошибки
+        //String createStatus = user.checkPhayerExist(name, passwordhash);//статус при создании пользователя ОК или описание ошибки
         //System.out.println("userCounter.get()=" + userCounter.get()+" createStatus="+ createStatus); //log2console
         return user;
 //                createStatus.equals("OK") ?
@@ -41,12 +40,12 @@ public class Controller {
     }
 
     //создание новой игры http://localhost:8080/creategame?player1id=1&player2id=2
-    @RequestMapping(value = "/creategame", method = RequestMethod.GET)
+    @RequestMapping(value = "/creategame", method = RequestMethod.POST)
     public @ResponseBody
     String createGame(@RequestParam(value = "player1id") int player1id,
                         @RequestParam(value = "player2id") int player2id) {
         Game game = new Game();
-        if (!game.userExist(player1id, users)) return "{\"error\":User1 not registered}";
+        if (!game.userExist(player1id, users)) return "{\"error\":user1 not registered}";
         if (!game.userExist(player2id, users)) return "{\"error\":user2 not registered}";
         if (!game.usersAreDifferent(player1id, player2id)) return "{\"error\":user cannot play with himself}";
         game.setId(gameCounter.get());

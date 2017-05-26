@@ -2,32 +2,27 @@
 STR="Hello World!"
 echo $STR
 echo
-#name users
-user1="Alexei"
-echo user1= $user1
-echo 
-user2="Elena"
-echo user2= $user2
-echo 
 
-#add users w/name above
-echo curl 'http://localhost:8080/tic-tac-toe/adduser?name='$user1'&code=11'
-echo -n "--"
-curl 'http://localhost:8080/tic-tac-toe/adduser?name='$user1'&code=11'
+#user1="Alexei" #переменные #echo user1= $user1
+
+#add users POST ------
+echo curl -d "name=Alexei&passwordhash=11" http://localhost:8080/tic-tac-toe/adduser
+echo -n "__"
+curl -d "name=Alexei&passwordhash=11" http://localhost:8080/tic-tac-toe/adduser
 echo  
 
-echo curl 'http://localhost:8080/tic-tac-toe/adduser?name='$user2'&code=22'
-echo -n "--"
-curl 'http://localhost:8080/tic-tac-toe/adduser?name='$user2'&code=22'
+echo curl -d "name=Elena&passwordhash=22" http://localhost:8080/tic-tac-toe/adduser
+echo -n "__"
+curl -d "name=Elena&passwordhash=22" http://localhost:8080/tic-tac-toe/adduser
 echo  
 #creategame ------ id 0 w/ id 1
-echo curl 'http://localhost:8080/tic-tac-toe/creategame?player1id=0&player2id=1'
-echo -n "--"
-curl 'http://localhost:8080/tic-tac-toe/creategame?player1id=0&player2id=1'
+echo curl -d "player1id=0&player2id=1" http://localhost:8080/tic-tac-toe/creategame
+echo -n "__"
+curl -d "player1id=0&player2id=1" http://localhost:8080/tic-tac-toe/creategame
 echo
-#debug ------
+#debug GET ------
 echo curl 'http://localhost:8080/tic-tac-toe/debug'
-echo -n "--"
+echo -n "__"
 curl 'http://localhost:8080/tic-tac-toe/debug'
 echo
 #cowsay ------
