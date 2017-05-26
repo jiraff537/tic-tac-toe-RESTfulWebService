@@ -10,26 +10,45 @@ import java.util.concurrent.atomic.AtomicLong;
  * Класс Пользователь(Игрок) и его параметры и атрибуты
  */
 public class User {
+    private int id;
     private String name;
     private int code;
 
-    public String create(String name, String code) {
+    public void create(int id,String name, int code) {
+        this.id=id;
         this.name = name;
-        try {
-            this.code = new Integer(code);
-        } catch (NumberFormatException e) {
-            return "ERROR " + e.getMessage() +
-                    " field 'code' must be integer!" +
-                    "<br><br>" + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор?
-        }
-        return "OK";
+        this.code=code;
+//        try {
+//            this.code = new Integer(code);
+//        } catch (NumberFormatException e) {
+//            return "ERROR " + e.getMessage() +
+//                    " field 'code' must be integer!" +
+//                    "<br><br>" + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор?
+//        }
+//        return "OK";
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
+    public int getCode() {
+        return code;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
 }

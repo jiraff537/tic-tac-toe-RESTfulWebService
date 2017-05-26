@@ -4,19 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by jiraff537 on 5/19/17.
+ * Created by jiraff537
+ * Реализация интерфейса сохранения и получения данных
  */
 public class SaveLoadData<T> implements SaveLoadDataAPI<T> {
-    List<T> data = new ArrayList<T>();
+    private List<T> data = new ArrayList<>();
 
     @Override
-    public int save(T t, int id) {
+    public boolean add(T t, int id) {
         data.add(id,t);
-        return id;//data.size();
+        return true;//data.size();
     }
 
     @Override
-    public T load(int id) {
+    public T get(int id) {
         return data.get(id);
     }
 

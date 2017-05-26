@@ -28,6 +28,13 @@
             <artifactId>json-path</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--http://spring.io/guides/gs/actuator-service/#scratch
+        $ curl localhost:9001/health
+        {"status":"UP"} -->
     </dependencies>
 
     <properties>

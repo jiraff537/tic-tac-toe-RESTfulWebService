@@ -1,7 +1,6 @@
 package game.Data;
 
 import game.SaveLoad.SaveLoadDataAPI;
-import game.utility.StringUtils;
 
 import java.util.Arrays;
 
@@ -10,43 +9,43 @@ import java.util.Arrays;
  * Класс Игра и ее параметры и атрибуты
  */
 public class Game {
+    private int id;
     private int player1id;
     private int player2id;
-    private int[] pole = {0, 0, 0,    //0 - ход не сделан(пустая клетка)
+    private int[] field = {0, 0, 0,    //0 - ход не сделан(пустая клетка)
             0, 0, 0,    //1 - Х крестик
             0, 0, 0};   //2 - О нолик
 
-//    int[] pole = {1, 2, 3,    //0 - ход не сделан(пустая клетка)
+//    int[] field = {1, 2, 3,    //0 - ход не сделан(пустая клетка)
 //            4, 5, 6,    //1 - Х крестик
 //            7, 8, 9};   //2 - О нолик
 
-    public String create(String player1id, String player2id, SaveLoadDataAPI<User> users) {
-        try { //проверка на то что мы получили цифру в payerid
-            this.player1id = new Integer(player1id);
-            this.player2id = new Integer(player2id);
-        } catch (NumberFormatException e) {
-            return "ERROR in field 'player1id' or 'player2id', both of it must be integer! " +
-                    e.getMessage(); // + "<br><br>" + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор
-        }
-        try {// проверка зарегистрированны ли такие пользователи с такими id
-            users.load(this.player1id);
-            users.load(this.player2id);
+    // проверка зарегистрирован ли такой пользователь с такими id
+    public boolean userExist(int player1id, SaveLoadDataAPI<User> users) {
+        try {
+            users.get(player1id);
         } catch (IndexOutOfBoundsException e) {
-            return "ERROR there is no such user registered! You input 'userid1=" + player1id + "' and 'user2id=" + player2id + "' "
-                    + e.getLocalizedMessage() + "<br><br>" + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор;
+            return false;
         }
-        if (this.player1id == this.player2id)
-            return "ERROR player1id and player2id must be not equal"; //если id первого и второго игрока равны.
-        return "OK";
+        return true;
     }
 
-    public String getPoleAsString() {
+    //проверка не пытается ли пользователь играть сам с собой
+    public boolean usersAreDifferent(int player1id, int player2id) {
+        return player1id != player2id;
+    }
+
+    public String getFieldAsString() {
 //        StringBuilder s = new StringBuilder();
-//        for (int i = 0; i < pole.length; i++) {
-//            s.append(pole[i]);
+//        for (int i = 0; i < field.length; i++) {
+//            s.append(field[i]);
 //        }
 //        return s.toString();
-        return Arrays.toString(pole); //избавился от цикла со StringBuilder'ом
+        return Arrays.toString(field); //избавился от цикла со StringBuilder'ом
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getPlayer1id() {
@@ -57,9 +56,23 @@ public class Game {
         return player2id;
     }
 
+    public int[] getField() {
+        return field;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public void setPlayer1id(int player1id) {
+        this.player1id = player1id;
+    }
 
+    public void setPlayer2id(int player2id) {
+        this.player2id = player2id;
+    }
 
-
+    public void setField(int[] field) {
+        this.field = field;
+    }
 }//class

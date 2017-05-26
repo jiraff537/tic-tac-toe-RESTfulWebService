@@ -3,15 +3,16 @@ package game.SaveLoad;
 import game.Data.User;
 
 /**
- * Created by jiraff537 on 5/19/17.
+ * Created by jiraff537
+ * Интерфейс сохранения и получения данных
  */
 public interface SaveLoadDataAPI<T> {//интерфейс сохраниния загрузки данных/ Дженерик для USER/GAME/TURN
 
 
-    public int save(T t,int id);
+    boolean add(T t, int id);
 
-    public T load(int id);
+    T get(int id);
 
-    public int size();
+    int size();
 
 }
