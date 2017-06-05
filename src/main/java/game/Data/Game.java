@@ -20,7 +20,7 @@ public class Game {
     //    int[] field = {1, 2, 3,    //0 - ход не сделан(пустая клетка)
 //                   4, 5, 6,    //1 - Х крестик
 //                   7, 8, 9};   //2 - О нолик
-    private int[] turns = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //все ходы игры игры
+    //private int[] turns = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //все ходы игры игры
     //private int turnNumber=0; //номер текущего хода
 
     //@JsonIgnore
@@ -100,13 +100,13 @@ public class Game {
         this.field = field;
     }
 
-    public int[] getTurns() {
-        return turns;
-    }
-
-    public void setTurns(int[] turns) {
-        this.turns = turns;
-    }
+//    public int[] getTurns() {
+//        return turns;
+//    }
+//
+//    public void setTurns(int[] turns) {
+//        this.turns = turns;
+//    }
 
     public boolean isCRAETED() {
         return CRAETED;

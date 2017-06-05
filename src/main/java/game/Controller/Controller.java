@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/tic-tac-toe")
 public class Controller {
-    private final AtomicInteger userCounter = new AtomicInteger();  //для уникальности id-пользователя
-    private final AtomicInteger gameCounter = new AtomicInteger();  //для уникальности id-игры
+    private final AtomicInteger userCounter = new AtomicInteger();  //уникальный id-пользователя
+    private final AtomicInteger gameCounter = new AtomicInteger();  //уникальный id-игры
 
 
     private SaveLoadDataAPI<User> users = new SaveLoadData<>();
@@ -56,6 +56,7 @@ public class Controller {
     @RequestMapping(value = "/gamestate", method = RequestMethod.GET)
     public @ResponseBody
     int[] getGameState(@RequestParam(value = "gameid") int gameId) {
+
         return games.get(gameId).getField(); //TODO QQQ: wrap with Arrays.toString()
     }
 
