@@ -57,7 +57,7 @@ public class Controller {
     public @ResponseBody
     int[] getGameState(@RequestParam(value = "gameid") int gameId) {
 
-        return games.get(gameId).getField(); //TODO QQQ: wrap with Arrays.toString()
+        return games.get(gameId).getField();
     }
 
     //совершение хода http://localhost:8080/tic-tac-toe/creategame?player1id=1&player2id=2
@@ -78,7 +78,7 @@ public class Controller {
         if (game.isCRAETED() && game.getUserIdWhoPlaysXandMakeTunrFirst()== -1) { //еслиигра создана и ходов ещё не было то это иргок делающий первых ход....
             game.setUserIdWhoPlaysXandMakeTunrFirst(userid);
         } else { //иначе проверить: а ваш ли сейчас ход сударь(%userid%)?
-            System.out.println("проверка ваш ли ход???");
+            //System.out.println("проверка ваш ли ход???");
             if (game.getUserIdWhoPlaysXandMakeTunrFirst()==userid && (game.turnsFromStart()%2==0)) return "{\"error\": X it is not you turn now}";
             if (game.getUserIdWhoPlaysXandMakeTunrFirst()!=userid && (game.turnsFromStart()%2==1)) return "{\"error\": O it is not you turn now}";
         }
@@ -89,14 +89,44 @@ public class Controller {
         if(currentSate[turn]!=0) return "{\"error\":you can't make this turn it's already taken}"; //клетка уже занята
         currentSate[turn]=currentMark; //делаю ход.
         if (game.turnsFromStart()==9) game.setGAMEOVER(true);//если уже сделано 9 ходов меняю статус игры
-        return Arrays.toString(game.getField());
 
 
 
-
-
+        return Arrays.toString(game.getField()); // + this.getstatus(gameid); //TODO QQQ ???
     }
 
+    //получитьтекущий статус игры http://localhost:8080/tic-tac-toe/getstatus?gameid=0
+    @RequestMapping(value = "/getstatus", method = RequestMethod.GET)
+    public @ResponseBody
+    String getstatus(@RequestParam(value = "gameid") int gameid) {
+        if (gameid >= games.size() || gameid < 0 ) return "{\"error\":there is no such game}";
+        Game game = games.get(gameid);
+        game.setGAMEOVER(true);//игра закончена если сработает любое из условий
+        int[] field = game.getField();
+        //если значения по горизонтали равны между собой и не равны нулю, значит выиграл пользователь которому принадлежат эти значения
+        //горизонталь выиграл ли кто-то? 012-345-678
+        if (field[0]==field[1]&&field[1]==field[2]&&field[0]!=0) {return "{\"win\":"+field[0]+"}";}
+        if (field[3]==field[4]&&field[4]==field[5]&&field[3]!=0) {return "{\"win\":"+field[3]+"}";}
+        if (field[6]==field[7]&&field[7]==field[8]&&field[6]!=0) {return "{\"win\":"+field[6]+"}";}
+        //вертикаль выиграл ли кто-то? 036-147-258
+        if (field[0]==field[3]&&field[3]==field[6]&&field[0]!=0) {return "{\"win\":"+field[0]+"}";}
+        if (field[1]==field[4]&&field[4]==field[7]&&field[1]!=0) {return "{\"win\":"+field[1]+"}";}
+        if (field[2]==field[5]&&field[5]==field[8]&&field[2]!=0) {return "{\"win\":"+field[2]+"}";}
+        //диагональ выиграл ли кто-то? 048-246
+        if (field[0]==field[4]&&field[4]==field[8]&&field[0]!=0) {return "{\"win\":"+field[0]+"}";}
+        if (field[2]==field[4]&&field[4]==field[6]&&field[2]!=0) {return "{\"win\":"+field[2]+"}";}
+        //ничья если все поля заняты (не равны нулю)
+        boolean gameisOver=true;
+        for (int i : field) {
+            if (i == 0) gameisOver = false; //если есть хотябы одна свободная клетка на игровом поле игра может бытьпродолжена
+        }
+        if (gameisOver == true) {
+            game.setGAMEOVER(true);
+            return "{\"win\":draw tie}"; //ничья!
+        }
+        game.setGAMEOVER(false);//ни одно из условий не сработало - игра продолжается...
+        return "{\"win\":0}"; //никто еще не победил и ничья не наступила - можно продолжать игру..
+    }
     //================DEBUG=============================
     @RequestMapping(value = "/debug", method = RequestMethod.GET)
     //Дебаг, тестирование чего-либо. http://localhost:8080/tic-tac-toe/debug

@@ -23,9 +23,13 @@ curl http://localhost:8080/tic-tac-toe/gamestate?gameid=0 && echo
 
 ##
 
-#POST maketurn ------ gameid=0 userid=0 turn=4
+#POST maketurns ------ gameid=0 userid->turn = 0->4 1->2 0->3 1->5
 echo curl -d "gameid=0&userid=0&turn=4" http://localhost:8080/tic-tac-toe/maketurn && echo -n "--->"
 curl -d "gameid=0&userid=0&turn=4" http://localhost:8080/tic-tac-toe/maketurn && echo
+curl -d "gameid=0&userid=1&turn=2" http://localhost:8080/tic-tac-toe/maketurn && echo
+curl -d "gameid=0&userid=0&turn=3" http://localhost:8080/tic-tac-toe/maketurn && echo
+curl -d "gameid=0&userid=1&turn=5" http://localhost:8080/tic-tac-toe/maketurn && echo
+curl -d "gameid=0&userid=0&turn=1" http://localhost:8080/tic-tac-toe/maketurn && echo
 
 
 

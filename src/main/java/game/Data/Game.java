@@ -64,7 +64,7 @@ public class Game {
         for (int i = 0; i < field.length; i++) {
             if (field[i]!=0) turnsWasMade=turnsWasMade+1;
         }
-        System.out.println(turnsWasMade);
+        //System.out.println(turnsWasMade);
         return turnsWasMade+1; //+1 т.к. текущий ход больше предидущего на 1
     }
 

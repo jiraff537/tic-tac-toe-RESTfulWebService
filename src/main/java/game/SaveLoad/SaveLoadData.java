@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Created by jiraff537
  * Реализация интерфейса сохранения и получения данных
+ * легко может быть заменена на сохранение данных в любом месте хранения от базы данных до простой серриализации объекта в файл
  */
 public class SaveLoadData<T> implements SaveLoadDataAPI<T> {
     private List<T> data = new ArrayList<>();
