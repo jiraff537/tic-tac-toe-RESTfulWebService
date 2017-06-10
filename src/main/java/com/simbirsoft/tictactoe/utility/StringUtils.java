@@ -1,4 +1,4 @@
-package game.utility;
+package com.simbirsoft.tictactoe.utility;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

@@ -1,4 +1,4 @@
-package game.Data;
+package com.simbirsoft.tictactoe.Data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

@@ -1,6 +1,6 @@
-package game.Data;
+package com.simbirsoft.tictactoe.Data;
 
-import game.SaveLoad.SaveLoadDataAPI;
+import com.simbirsoft.tictactoe.SaveLoad.SaveLoadDataAPI;
 
 import java.util.Arrays;
 
@@ -39,7 +39,7 @@ public class Game {
         try {
             users.get(player1id);
         } catch (IndexOutOfBoundsException e) {
-            return false;
+            return false; //значит пользователя с таким id не существует!
         }
         return true;
     }
@@ -49,6 +49,7 @@ public class Game {
         return player1id != player2id;
     }
 
+    @Deprecated //пока что обхожусь без этого метода
     public String FieldAsString() {
 //        StringBuilder s = new StringBuilder();
 //        for (int i = 0; i < field.length; i++) {
@@ -58,7 +59,8 @@ public class Game {
         return Arrays.toString(field); //избавился от цикла со StringBuilder'ом
     }
 
-    public int turnsFromStart(){  //сколько ходов сделано c начала игры и вычисление текущего номера хода
+    public int turnFromStart(){  //сколько ходов сделано c начала игры и вычисление номера текущего хода
+        // (если с начала игры сделано три хода значит сейчас четвертыйход)
         int turnsWasMade=0;
         for (int i = 0; i < field.length; i++) {
             if (field[i]!=0) turnsWasMade=turnsWasMade+1;

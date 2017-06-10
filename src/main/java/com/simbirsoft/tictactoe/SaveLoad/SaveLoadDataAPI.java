@@ -1,6 +1,4 @@
-package game.SaveLoad;
-
-import game.Data.User;
+package com.simbirsoft.tictactoe.SaveLoad;
 
 /**
  * Created by jiraff537

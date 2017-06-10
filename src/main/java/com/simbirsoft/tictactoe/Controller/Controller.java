@@ -1,12 +1,12 @@
-package game.Controller;
+package com.simbirsoft.tictactoe.Controller;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import game.Data.Game;
-import game.SaveLoad.SaveLoadData;
-import game.SaveLoad.SaveLoadDataAPI;
-import game.Data.User;
+import com.simbirsoft.tictactoe.Data.Game;
+import com.simbirsoft.tictactoe.SaveLoad.SaveLoadData;
+import com.simbirsoft.tictactoe.SaveLoad.SaveLoadDataAPI;
+import com.simbirsoft.tictactoe.Data.User;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -79,8 +79,8 @@ public class Controller {
             game.setUserIdWhoPlaysXandMakeTunrFirst(userid);
         } else { //иначе проверить: а ваш ли сейчас ход сударь(%userid%)?
             //System.out.println("проверка ваш ли ход???");
-            if (game.getUserIdWhoPlaysXandMakeTunrFirst()==userid && (game.turnsFromStart()%2==0)) return "{\"error\": X it is not you turn now}";
-            if (game.getUserIdWhoPlaysXandMakeTunrFirst()!=userid && (game.turnsFromStart()%2==1)) return "{\"error\": O it is not you turn now}";
+            if (game.getUserIdWhoPlaysXandMakeTunrFirst()==userid && (game.turnFromStart()%2==0)) return "{\"error\": X it is not you turn now}";
+            if (game.getUserIdWhoPlaysXandMakeTunrFirst()!=userid && (game.turnFromStart()%2==1)) return "{\"error\": O it is not you turn now}";
         }
         //game.turnNumber++
         int currentMark;//ходит крестик(1) или нолик(2)
@@ -88,7 +88,7 @@ public class Controller {
         int[] currentSate = game.getField(); //текущее состояние поля
         if(currentSate[turn]!=0) return "{\"error\":you can't make this turn it's already taken}"; //клетка уже занята
         currentSate[turn]=currentMark; //делаю ход.
-        if (game.turnsFromStart()==9) game.setGAMEOVER(true);//если уже сделано 9 ходов меняю статус игры
+        if (game.turnFromStart()==9) game.setGAMEOVER(true);//если уже сделано 9 ходов меняю статус игры
 
 
 
