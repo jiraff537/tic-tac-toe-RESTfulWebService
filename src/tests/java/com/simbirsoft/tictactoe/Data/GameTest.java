@@ -17,12 +17,12 @@ public class GameTest {
 
     @BeforeClass
     public static void beforeClass() {
-        System.out.println("---Before GameTest.class");
+        System.out.println("--> Before GameTest.class");
     }
 
     @AfterClass
     public static void afterClass() {
-        System.out.println("---After GameTest.class");
+        System.out.println("<-- After GameTest.class");
     }
 
     @Before
@@ -69,7 +69,7 @@ public class GameTest {
     }
 
     @Test
-    public void turnFromStart() throws Exception {
+    public void turnFromStart() throws Exception { //какой сейчас ход если сделано три? четвертый!
         int[] field = {2, 0, 0,
                 0, 1, 0,
                 0, 0, 1};
@@ -79,59 +79,59 @@ public class GameTest {
 
     //Геттеры и сеттеры не тестирую
 
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void getId() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void getUser1id() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void getUser2id() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void getField() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setId() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setUser1id() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setUser2id() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setField() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void isCRAETED() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setCRAETED() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void isGAMEOVER() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setGAMEOVER() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void getUserIdWhoPlaysXandMakeTunrFirst() throws Exception {
     }
-    @Ignore("Getter/Setter do not need to test")
+    @Ignore("Getter/Setter no need to test it")
     @Test
     public void setUserIdWhoPlaysXandMakeTunrFirst() throws Exception {
     }

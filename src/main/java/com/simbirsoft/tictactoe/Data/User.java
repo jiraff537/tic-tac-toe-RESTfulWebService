@@ -9,21 +9,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
     private int id;
     private String name;
-    @JsonIgnore
+    @JsonIgnore //чтобы не выводился хэш пароля в JSON ответах на REST запросы; хоть какаято "безопасность" :(
     private int passwordhash;
 
+    @Deprecated //пока что обхожусь без этого метода
     public void create(int id,String name, int passwordhash) {
         this.id=id;
         this.name = name;
         this.passwordhash =passwordhash;
-//        try {
-//            this.passwordhash = new Integer(passwordhash);
-//        } catch (NumberFormatException e) {
-//            return "ERROR " + e.getMessage() +
-//                    " field 'passwordhash' must be integer!" +
-//                    "<br><br>" + StringUtils.StackTraceAsString(e);//stackTrace это наверное перебор?
-//        }
-//        return "OK";
     }
 
     public int getId() {
