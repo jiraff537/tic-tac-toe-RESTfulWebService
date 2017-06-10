@@ -1,6 +1,5 @@
 package game.Data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import game.SaveLoad.SaveLoadDataAPI;
 
 import java.util.Arrays;
@@ -24,7 +23,7 @@ public class Game {
     //private int turnNumber=0; //номер текущего хода
 
     //@JsonIgnore
-    private boolean CRAETED = false; //игра создана
+    private boolean CREATED = false; //игра создана
     //private boolean INPROCESS = false; //сделано более 1го хода
     private boolean GAMEOVER = false; //игра завершена (некуда ходить/победил один из гроков)
     //private int firstTurnUserid = -1; //id игрока совершившего первый ход (-1 ходов ещё не было)
@@ -108,12 +107,12 @@ public class Game {
 //        this.turns = turns;
 //    }
 
-    public boolean isCRAETED() {
-        return CRAETED;
+    public boolean isCREATED() {
+        return CREATED;
     }
 
-    public void setCRAETED(boolean CRAETED) {
-        this.CRAETED = CRAETED;
+    public void setCREATED(boolean CREATED) {
+        this.CREATED = CREATED;
     }
 
     public boolean isGAMEOVER() {

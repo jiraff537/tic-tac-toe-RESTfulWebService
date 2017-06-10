@@ -6,8 +6,9 @@ import java.io.StringWriter;
 /**
  * This is Created by jiraff537 on 5/22/17.
  * Вспомогательный класс для всяких мелких поручений чтобы не дублировать код.
+ * так получилось что я справился без этого класса :) поэтому @Deprecated
  */
-//@Deprecated
+@Deprecated
 public class StringUtils {
 
     public static String StackTraceAsString(Exception e){ //convert a stack trace to a string

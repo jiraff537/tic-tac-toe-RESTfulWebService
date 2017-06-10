@@ -46,7 +46,7 @@ public class Controller {
         game.setId(gameCounter.get());
         game.setUser1id(user1id);
         game.setUser2id(user2id);
-        game.setCRAETED(true);
+        game.setCREATED(true);
         int gameid = gameCounter.get();
         games.add(game, gameCounter.getAndIncrement());
         return "{\"gameid\":" + gameid + "}";
@@ -75,7 +75,7 @@ public class Controller {
         if (game.getUser1id()!= userid && game.getUser2id() != userid) return "{\"error\": user with this userid not play in this game}";
         if (game.isGAMEOVER()) return "{\"error\": this game is over}";
         //изменяем
-        if (game.isCRAETED() && game.getUserIdWhoPlaysXandMakeTunrFirst()== -1) { //еслиигра создана и ходов ещё не было то это иргок делающий первых ход....
+        if (game.isCREATED() && game.getUserIdWhoPlaysXandMakeTunrFirst()== -1) { //еслиигра создана и ходов ещё не было то это иргок делающий первых ход....
             game.setUserIdWhoPlaysXandMakeTunrFirst(userid);
         } else { //иначе проверить: а ваш ли сейчас ход сударь(%userid%)?
             //System.out.println("проверка ваш ли ход???");
