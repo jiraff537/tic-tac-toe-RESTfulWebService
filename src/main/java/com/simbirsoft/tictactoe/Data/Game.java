@@ -30,10 +30,6 @@ public class Game {
     //первый ход делает
     private int userIdWhoPlaysXandMakeTunrFirst=-1;//id пользователя играющего крестиком и ходящим первым (-1 если ходов в игре еще не седлано)
 
-    //@JsonIgnore
-
-
-
     // проверка зарегистрирован ли такой пользователь с такими id
     public boolean userExist(int player1id, SaveLoadDataAPI<User> users) {
         try {
@@ -45,8 +41,8 @@ public class Game {
     }
 
     //проверка не пытается ли пользователь играть сам с собой
-    public boolean usersAreDifferent(int player1id, int player2id) {
-        return player1id != player2id;
+    public boolean usersAreDifferent(int user1id, int user2id) {
+        return user1id != user2id;
     }
 
     @Deprecated //пока что обхожусь без этого метода

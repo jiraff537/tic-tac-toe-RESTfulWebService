@@ -2,7 +2,6 @@ package com.simbirsoft.tictactoe.Controller;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import com.simbirsoft.tictactoe.Data.Game;
 import com.simbirsoft.tictactoe.SaveLoad.SaveLoadData;
 import com.simbirsoft.tictactoe.SaveLoad.SaveLoadDataAPI;
@@ -10,8 +9,8 @@ import com.simbirsoft.tictactoe.Data.User;
 import org.springframework.web.bind.annotation.*;
 
 
-//@RestController ==@Controller + @ResponseBody
-@RestController
+
+@RestController //@RestController ==@Controller + @ResponseBody
 @RequestMapping("/tic-tac-toe")
 public class Controller {
     private final AtomicInteger userCounter = new AtomicInteger();  //уникальный id-пользователя
@@ -21,7 +20,7 @@ public class Controller {
     private SaveLoadDataAPI<User> users = new SaveLoadData<>();
     private SaveLoadDataAPI<Game> games = new SaveLoadData<>();
 
-    //регистрация пользователя http://localhost:8080/tic-tac-toe/adduser?name=Alexei&code=11
+    //регистрация пользователя http://localhost:8080/tic-tac-toe/adduser?name=Alexei&passwordhash=11
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public @ResponseBody
     User addUser(@RequestParam(value = "name") String name,
@@ -34,7 +33,7 @@ public class Controller {
         return user;
     }
 
-    //создание новой игры http://localhost:8080/tic-tac-toe/creategame?player1id=1&player2id=2
+    //создание новой игры http://localhost:8080/tic-tac-toe/creategame?user1id=0&user2id=1
     @RequestMapping(value = "/creategame", method = RequestMethod.POST)
     public @ResponseBody
     String createGame(@RequestParam(value = "user1id") int user1id,
@@ -52,15 +51,14 @@ public class Controller {
         return "{\"gameid\":" + gameid + "}";
     }
 
-    //получить текущее состояние игрового поля http://localhost:8080/tic-tac-toe/gamestate?gameid=1
-    @RequestMapping(value = "/gamestate", method = RequestMethod.GET)
+    //получить текущее состояние игрового поля http://localhost:8080/tic-tac-toe/fieldstate?gameid=0
+    @RequestMapping(value = "/fieldstate", method = RequestMethod.GET)
     public @ResponseBody
-    int[] getGameState(@RequestParam(value = "gameid") int gameId) {
-
+    int[] getFieldState(@RequestParam(value = "gameid") int gameId) {
         return games.get(gameId).getField();
     }
 
-    //совершение хода http://localhost:8080/tic-tac-toe/creategame?player1id=1&player2id=2
+    //совершение хода http://localhost:8080/tic-tac-toe/maketurn?gameid=0&userid=0&turn=4
     @RequestMapping(value = "/maketurn", method = RequestMethod.POST)
     public @ResponseBody
     String makeTurn(@RequestParam(value = "gameid") int gameid,
@@ -88,13 +86,18 @@ public class Controller {
         int[] currentSate = game.getField(); //текущее состояние поля
         if(currentSate[turn]!=0) return "{\"error\":you can't make this turn it's already taken}"; //клетка уже занята
         currentSate[turn]=currentMark; //делаю ход.
-        if (game.turnFromStart()==9) game.setGAMEOVER(true);//если уже сделано 9 ходов меняю статус игры
+        if (game.turnFromStart()==10) game.setGAMEOVER(true);//если уже сделано 9 ходов и текущий ход десятый меняю статус игры на завершенную
 
 
 
-        return Arrays.toString(game.getField()); // + this.getstatus(gameid); //TODO QQQ ???
+        return Arrays.toString(game.getField()); // + this.getstatus(gameid); //TODO ДАилиНЕТ !?!
     }
 
+    /**
+     * проверка статуса игры: победа? ничья? игра еще не завершена?
+     * @param gameid -id игры
+     * @return статус игры 1 - победа крестиков, 2 - победа ноликов, draw tie - ничья, 0 - игра еще не завершена
+     */
     //получитьтекущий статус игры http://localhost:8080/tic-tac-toe/getstatus?gameid=0
     @RequestMapping(value = "/getstatus", method = RequestMethod.GET)
     public @ResponseBody
@@ -103,7 +106,8 @@ public class Controller {
         Game game = games.get(gameid);
         game.setGAMEOVER(true);//игра закончена если сработает любое из условий
         int[] field = game.getField();
-        //если значения по горизонтали равны между собой и не равны нулю, значит выиграл пользователь которому принадлежат эти значения
+        //если значения по горизонтали(вертикади,диагонали) равны между собой и не равны нулю,
+        // значит выиграл пользователь которому принадлежат эти значения
         //горизонталь выиграл ли кто-то? 012-345-678
         if (field[0]==field[1]&&field[1]==field[2]&&field[0]!=0) {return "{\"win\":"+field[0]+"}";}
         if (field[3]==field[4]&&field[4]==field[5]&&field[3]!=0) {return "{\"win\":"+field[3]+"}";}
@@ -118,7 +122,7 @@ public class Controller {
         //ничья если все поля заняты (не равны нулю)
         boolean gameisOver=true;
         for (int i : field) {
-            if (i == 0) gameisOver = false; //если есть хотябы одна свободная клетка на игровом поле игра может бытьпродолжена
+            if (i == 0) gameisOver = false; //если есть свободная клетка на игровом поле игра не завершена
         }
         if (gameisOver == true) {
             game.setGAMEOVER(true);
@@ -131,13 +135,14 @@ public class Controller {
     @RequestMapping(value = "/debug", method = RequestMethod.GET)
     //Дебаг, тестирование чего-либо. http://localhost:8080/tic-tac-toe/debug
     public String debug(@RequestParam(value = "debug", defaultValue = "1") int debug) {
+        //все пользователи
         String allUsers = null;
         StringBuilder sbUsers = new StringBuilder();
         for (int i = 0; i < users.size(); i++) {
             sbUsers.append("<br>|users.id=" + i + " |user.name=" + users.get(i).getName());
             allUsers = sbUsers.toString();
         }
-
+        //все игры
         String allGames = null;
         StringBuilder sbGames = new StringBuilder();
         for (int i = 0; i < games.size(); i++) {
@@ -163,6 +168,6 @@ public class Controller {
 //
 //        return new Greeting(counter.incrementAndGet(), String.format(template, name, age));
 //    }
-}//class//
+}//class
 
 //

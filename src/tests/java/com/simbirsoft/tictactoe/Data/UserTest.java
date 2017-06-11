@@ -18,6 +18,7 @@ public class UserTest {
     public static void afterClass() {
         System.out.println("<-- After UserTest.class");
     }
+
     @Before
     public void setUp() throws Exception {
         user = new User();
@@ -33,11 +34,11 @@ public class UserTest {
         user.setId(0);
         user.setName("John Doe");
         user.setPasswordhash(537);
-        User user1 = new User();
-        user1.create(0,"John Doe",537);
-        assertTrue(user.getId()==user1.getId());
-        assertTrue(user.getName()==user1.getName());
-        assertTrue(user.getPasswordhash()==user1.getPasswordhash());
+        User userToCompare = new User();
+        userToCompare.create(0,"John Doe",537);
+        assertTrue(user.getId()==userToCompare.getId());
+        assertTrue(user.getName()==userToCompare.getName());
+        assertTrue(user.getPasswordhash()==userToCompare.getPasswordhash());
     }
     @Ignore("Getter/Setter no need to test it")
     @Test

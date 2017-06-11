@@ -60,7 +60,6 @@ public class GameTest {
 
     @Test
     public void fieldAsString() throws Exception {
-
         int[] field = {0, 0, 0,
                 0, 0, 0,
                 0, 0, 0};
