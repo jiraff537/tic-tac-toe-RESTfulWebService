@@ -53,29 +53,27 @@ public class ControllerTest {
     public void addUser() throws Exception {
         user = controller.addUser("John Doe", 537);
         //---проверка возварщаемого значения при добавлении пользователя.
-        assertTrue(user.getId() == 0);
-        assertTrue(user.getName() == "John Doe");
-        assertTrue(user.getPasswordhash() == 537);
+        assertEquals(user.getId(), 0);
+        assertEquals(user.getName(), "John Doe");
+        assertEquals(user.getPasswordhash(), 537);
         //проверка что id-шник инкрементируется при добавлении следующего пользователя
         user = null;
         user = controller.addUser("Joann Doe", 538);
         assertTrue(user.getId() == 1);
-        //---проверка того что пользователь добавился в users
-        //TODO 1218
-        //assertTrue(users.get(0).);
     }
 
     @Test
     public void createGame() throws Exception {
+        //---проверка возварщаемого значения при создании игры между пользователями
         controller.addUser("John Doe", 537);
         controller.addUser("Joann Doe", 538);
         String res = controller.createGame(0, 1);
         assertEquals("{\"gameid\":0}", res);
-
     }
 
     @Test
     public void getFieldState() throws Exception {
+        //---проверка возварщаемого значения при запросе состояния поля
         controller.addUser("John Doe", 537);
         controller.addUser("Joann Doe", 538);
         controller.createGame(0, 1);
@@ -92,6 +90,7 @@ public class ControllerTest {
 
     @Test
     public void makeTurn() throws Exception {
+        //---проверка возварщаемого значения при совершении хода
         controller.addUser("John Doe", 537);
         controller.addUser("Joann Doe", 538);
         controller.createGame(0, 1);
@@ -108,21 +107,19 @@ public class ControllerTest {
 
     @Test
     public void getstatusWinX() throws Exception {
+        //---проверка возварщаемого значения при получении статуса игры (победа(X|O)|ничья|можно дальше играть)
         controller.addUser("John Doe", 537);
         controller.addUser("Joann Doe", 538);
         controller.createGame(0, 1);
         //проверка победы крестиков
-        System.out.println("X");
         controller.makeTurn(0,0,4);
         controller.makeTurn(0,1,5);
         controller.makeTurn(0,0,1);
         controller.makeTurn(0,1,2);
         controller.makeTurn(0,0,7);
-        System.out.println(Arrays.toString(controller.getFieldState(0)));
-        int[] fieldWhenXWins = {0, 1, 2, 0, 1, 2, 0, 1, 0}; //ожидаемое состояние поля
+        //System.out.println("X"+Arrays.toString(controller.getFieldState(0))); // {0, 1, 2, 0, 1, 2, 0, 1, 0}; //ожидаемое состояние поля
         assertEquals("{\"win\":1}",controller.getstatus(0));
         //проверка победы ноликов
-        System.out.println("O");
         controller.createGame(0, 1);
         controller.makeTurn(1,0,4);
         controller.makeTurn(1,1,5);
@@ -130,11 +127,9 @@ public class ControllerTest {
         controller.makeTurn(1,1,8);
         controller.makeTurn(1,0,0);
         controller.makeTurn(1,1,2);
-        System.out.println(Arrays.toString(controller.getFieldState(1)));
-        int[] fieldWhenOWins = {1, 0, 2, 1, 1, 2, 0, 0, 2}; //ожидаемое состояние поля
+        //System.out.println("O"=Arrays.toString(controller.getFieldState(1))); // {1, 0, 2, 1, 1, 2, 0, 0, 2}; //ожидаемое состояние поля
         assertEquals("{\"win\":2}",controller.getstatus(1));
         //проверка ничьи
-        System.out.println("draw tie");
         controller.createGame(0, 1);
         controller.makeTurn(2,0,4);
         controller.makeTurn(2,1,5);
@@ -145,13 +140,9 @@ public class ControllerTest {
         controller.makeTurn(2,0,1);
         controller.makeTurn(2,1,2);
         controller.makeTurn(2,0,3);
-        System.out.println(Arrays.toString(controller.getFieldState(2)));
-        int[] fieldWhenDrawTie = {2, 1, 2, 1, 1, 2, 1, 2, 1}; //ожидаемое состояние поля
+        //System.out.println(Arrays.toString(controller.getFieldState(2))); //{2, 1, 2, 1, 1, 2, 1, 2, 1}; //ожидаемое состояние поля
         assertEquals("{\"win\":draw tie}",controller.getstatus(2));
-
-        //TODO
         //проверка того что игра может быть продолжена
-        System.out.println("game not over");
         controller.createGame(0, 1);
         controller.makeTurn(3,0,4);
         controller.makeTurn(3,1,5);
@@ -161,8 +152,7 @@ public class ControllerTest {
         controller.makeTurn(3,1,0);
         controller.makeTurn(3,0,1);
         controller.makeTurn(3,1,2);
-        System.out.println(Arrays.toString(controller.getFieldState(3)));
-        int[] fieldWhenGameNotOver = {2, 1, 2, 0, 1, 2, 1, 2, 1}; //ожидаемое состояние поля
+        //System.out.println(Arrays.toString(controller.getFieldState(3))); //{2, 1, 2, 0, 1, 2, 1, 2, 1}; //ожидаемое состояние поля
         assertEquals("{\"win\":0}",controller.getstatus(3));
     }
 
