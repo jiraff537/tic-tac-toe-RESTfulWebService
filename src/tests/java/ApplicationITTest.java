@@ -1,4 +1,3 @@
-
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONArray;
@@ -6,6 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static io.restassured.RestAssured.expect;
 import static io.restassured.RestAssured.get;
@@ -18,6 +21,9 @@ import static org.junit.Assert.assertEquals;
  * Интеграционный тест java REST работает при локально запущенном приложении
  */
 
+//@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=com.simbirsoft.tictactoe.Application.class)
 
 public class ApplicationITTest {
 
