@@ -87,9 +87,7 @@ public class Controller {
         if(currentSate[turn]!=0) return "{\"error\":you can't make this turn it's already taken}"; //клетка уже занята
         currentSate[turn]=currentMark; //делаю ход.
         if (game.turnFromStart()==10) game.setGAMEOVER(true);//если уже сделано 9 ходов и текущий ход десятый меняю статус игры на завершенную
-
-
-
+        this.getstatus(gameid);
         return Arrays.toString(game.getField()); // + this.getstatus(gameid); //TODO ДАилиНЕТ !?!
     }
 
