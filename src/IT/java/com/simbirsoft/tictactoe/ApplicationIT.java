@@ -75,6 +75,5 @@ public class ApplicationIT {
         //GET //получаем состояние поля
         resp = get(baseURL+"fieldstate?gameid=0");
         assertEquals(resp.asString(), "[1,0,2,1,1,0,1,2,2]");
-
     }
 }//class

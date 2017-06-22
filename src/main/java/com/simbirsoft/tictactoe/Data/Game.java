@@ -15,18 +15,12 @@ public class Game {
             0, 0, 0,    //1 - Х крестик
             0, 0, 0};   //2 - О нолик
 
-    //    int[] field = {1, 2, 3,    //0 - ход не сделан(пустая клетка)
-//                   4, 5, 6,    //1 - Х крестик
-//                   7, 8, 9};   //2 - О нолик
-    //private int[] turns = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //все ходы игры игры
-    //private int turnNumber=0; //номер текущего хода
 
     //@JsonIgnore
     private boolean CREATED = false; //игра создана
-    //private boolean INPROCESS = false; //сделано более 1го хода
+
     private boolean GAMEOVER = false; //игра завершена (некуда ходить/победил один из гроков)
-    //private int firstTurnUserid = -1; //id игрока совершившего первый ход (-1 ходов ещё не было)
-    //первый ход делает
+
     private int userIdWhoPlaysXandMakeTunrFirst=-1;//id пользователя играющего крестиком и ходящим первым (-1 если ходов в игре еще не седлано)
 
     // проверка зарегистрирован ли такой пользователь с такими id

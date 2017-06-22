@@ -27,5 +27,5 @@ public class Application {
 // build the JAR file ./mvn clean package
 //java -jar target/gs-rest-service-0.1.0.jar
 
-// если вдруг failed to start end point associated with protocolhandler http-nio-8080 то:
+// если вдруг Failed to start end point associated with ProtocolHandler [http-nio-8080] то:
 //  lsof -i :<portNumber> | grep LISTEN
