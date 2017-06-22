@@ -1,15 +1,5 @@
 package com.simbirsoft.tictactoe.Controller;
 
-import org.springframework.boot.autoconfigure.web.ErrorController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-/**
- * Created by jiraff537 on 5/21/17.
- * http://stackoverflow.com/questions/25356781/spring-boot-remove-whitelabel-error-page
- *
- */
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -21,6 +11,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+
+
+/**
+ * Контрроллер ошибок для избавления от "White Page"
+ */
 
 @RestController
 @RequestMapping("/error")

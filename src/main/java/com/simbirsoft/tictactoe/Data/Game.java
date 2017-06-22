@@ -5,8 +5,7 @@ import com.simbirsoft.tictactoe.SaveLoad.SaveLoadDataAPI;
 import java.util.Arrays;
 
 /**
- * Created by jiraff537 on 5/19/17.
- * Класс Игра и ее параметры и атрибуты
+ * Класс Игра и ее параметры и методы
  */
 public class Game {
     private int id;
@@ -58,8 +57,8 @@ public class Game {
     public int turnFromStart(){  //сколько ходов сделано c начала игры и вычисление номера текущего хода
         // (если с начала игры сделано три хода значит сейчас четвертыйход)
         int turnsWasMade=0;
-        for (int i = 0; i < field.length; i++) {
-            if (field[i]!=0) turnsWasMade=turnsWasMade+1;
+        for (int aField : field) {
+            if (aField != 0) turnsWasMade = turnsWasMade + 1;
         }
         //System.out.println(turnsWasMade);
         return turnsWasMade+1; //+1 т.к. текущий ход больше предидущего на 1
@@ -96,14 +95,6 @@ public class Game {
     public void setField(int[] field) {
         this.field = field;
     }
-
-//    public int[] getTurns() {
-//        return turns;
-//    }
-//
-//    public void setTurns(int[] turns) {
-//        this.turns = turns;
-//    }
 
     public boolean isCREATED() {
         return CREATED;

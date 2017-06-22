@@ -3,8 +3,7 @@ package com.simbirsoft.tictactoe.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * Created by jiraff537 on 5/19/17.
- * Класс Пользователь(Игрок) и его параметры и атрибуты
+ * Класс Пользователь(Игрок) и его параметры и методы
  */
 public class User {
     private int id;
